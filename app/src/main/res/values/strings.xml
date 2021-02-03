@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">MyFirstAndroidApp</string>
-    <string name="name_hint">Name</string>
-    <string name="email_hint">Email Address</string>
-    <string name="phone_hint">Phone Number</string>
-    <string name="button_save_text">Save</string>
+    <string name="app_name">AndroidApp</string>
+    <string name="welcomeText">Hejka / Hello</string>
+    <string name="buttonNextText">DALEJ</string>
+    <string name="editTextNickHintText">wpisz swój nick</string>
+    <string name="buttonSendText">WYŚLIJ</string>
 </resources>
