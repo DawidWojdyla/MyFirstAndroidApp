@@ -11,7 +11,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 
-public class ApiRequestManager {
+public class HttpJsonExchanger {
 
     public JSONObject exchangeJsonWithApi(String url, String stringJson) {
         for (int i = 0; i <= Constants.HTTP_REQUEST_CONNECT_RETRIES_NUMBER; i++) {
