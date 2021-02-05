@@ -2,6 +2,6 @@
     <string name="app_name">AndroidApp</string>
     <string name="welcomeText">Hejka / Hello</string>
     <string name="buttonNextText">DALEJ</string>
-    <string name="editTextNickHintText">wpisz swój nick</string>
+    <string name="askForNickHintText">Wpisz swój nick</string>
     <string name="buttonSendText">WYŚLIJ</string>
 </resources>
