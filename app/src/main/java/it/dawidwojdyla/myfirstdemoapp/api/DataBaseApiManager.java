@@ -16,8 +16,8 @@ public class DataBaseApiManager {
 
     public void getLastInsertedData() {
         try {
-            exchangeJsonWithApi(getRequestUrl(
-                    Constants.GET_DATA_ACTION), prepareAuthorizationJson(), this::showGetDataResponse);
+            exchangeJsonWithApi(getRequestUrl(Constants.GET_DATA_ACTION),
+                    prepareAuthorizationJson(), this::showGetDataResponse);
         } catch (JSONException e) {
             e.printStackTrace();
             mainActivity.setMessageTextView(Constants.GET_DATA_ERROR_MESSAGE);

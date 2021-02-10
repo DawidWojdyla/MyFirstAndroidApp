@@ -13,8 +13,8 @@ import it.dawidwojdyla.myfirstdemoapp.api.DataBaseApiManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView messageTextView;
-    EditText nicknameEditText;
+    private TextView messageTextView;
+    private EditText nicknameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendNicknameIfValid(String nickname, DataBaseApiManager dbManager) {
+        nickname = nickname.trim();
         if (nickname.length() < Constants.MIN_NICKNAME_LENGTH || nickname.length() > Constants.MAX_NICKNAME_LENGTH ) {
             showToast(Constants.NICKNAME_LENGTH_ERROR_MESSAGE);
         } else {
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public void showToast(String message) {
         runOnUiThread(() -> Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show());
     }
+
     public void clearNicknameEditText() {
         runOnUiThread(() -> nicknameEditText.setText(""));
     }

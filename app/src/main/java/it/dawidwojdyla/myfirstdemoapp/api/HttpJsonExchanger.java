@@ -18,7 +18,6 @@ public class HttpJsonExchanger {
     public JSONObject exchangeJsonWithApi(String url, JSONObject json) {
         for (int i = 0; i <= Constants.HTTP_REQUEST_CONNECT_RETRIES_NUMBER; i++) {
             try {
-
                 HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
@@ -32,8 +31,9 @@ public class HttpJsonExchanger {
                 StringBuilder response = new StringBuilder();
                 String responseLine;
                 while ((responseLine = bufferedReader.readLine()) != null) {
-                    response.append(responseLine);
+                    response.append(responseLine.trim());
                 }
+
                 return new JSONObject(response.toString());
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
