@@ -1,5 +1,6 @@
 package it.dawidwojdyla.myfirstdemoapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -15,13 +16,31 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView messageTextView;
     private EditText nicknameEditText;
+    private boolean switchedToMainLayout = false;
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle saveInstanceState) {
+        super.onSaveInstanceState(saveInstanceState);
+        if (switchedToMainLayout) {
+            saveInstanceState.putBoolean("switchedToMainLayout", switchedToMainLayout);
+            saveInstanceState.putString("messageTextView", messageTextView.getText().toString());
+            saveInstanceState.putString("nicknameEditText", nicknameEditText.getText().toString());
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_welcome);
-        Button showMainWindowButton = findViewById(R.id.btn_next);
-        showMainWindowButton.setOnClickListener(l -> manageMainWindow());
+        if (savedInstanceState != null && savedInstanceState.getBoolean("switchedToMainLayout")) {
+            manageMainWindow();
+            messageTextView.setText(savedInstanceState.getString("messageTextView"));
+            nicknameEditText.setText(savedInstanceState.getString("nicknameEditText"));
+        } else {
+            setContentView(R.layout.layout_welcome);
+            Button showMainWindowButton = findViewById(R.id.btn_next);
+            showMainWindowButton.setOnClickListener(l -> manageMainWindow());
+        }
     }
 
     private void manageMainWindow() {
@@ -29,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         messageTextView = findViewById(R.id.tv_message);
         nicknameEditText = findViewById(R.id.et_nickname);
         Button sendButton = findViewById(R.id.btn_send);
+        switchedToMainLayout = true;
         DataBaseApiManager dbManager = new DataBaseApiManager(this);
         dbManager.getLastInsertedData();
         sendButton.setOnClickListener(l -> sendNicknameIfValid(nicknameEditText.getText().toString(), dbManager));
