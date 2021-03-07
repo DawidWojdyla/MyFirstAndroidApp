@@ -35,6 +35,7 @@ public class HttpJsonExchanger {
                 }
 
                 return new JSONObject(response.toString());
+
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }

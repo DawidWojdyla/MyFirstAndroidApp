@@ -3,6 +3,8 @@ package it.dawidwojdyla.myfirstdemoapp.api;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.NoSuchAlgorithmException;
+
 import it.dawidwojdyla.myfirstdemoapp.Constants;
 import it.dawidwojdyla.myfirstdemoapp.MainActivity;
 
@@ -18,7 +20,7 @@ public class DataBaseApiManager {
         try {
             exchangeJsonWithApi(getRequestUrl(Constants.GET_DATA_ACTION),
                     prepareAuthorizationJson(), this::showGetDataResponse);
-        } catch (JSONException e) {
+        } catch (JSONException | NoSuchAlgorithmException e) {
             e.printStackTrace();
             mainActivity.setMessageTextView(Constants.GET_DATA_ERROR_MESSAGE);
         }
@@ -28,7 +30,7 @@ public class DataBaseApiManager {
         try {
             exchangeJsonWithApi(getRequestUrl(Constants.SEND_DATA_ACTION),
                     prepareSendNicknameJson(nickname), this::showSendDataStatus);
-        } catch (JSONException e) {
+        } catch (JSONException | NoSuchAlgorithmException e) {
             e.printStackTrace();
             mainActivity.showToast(Constants.SEND_DATA_ERROR_MESSAGE);
         }
@@ -42,8 +44,8 @@ public class DataBaseApiManager {
         thread.start();
     }
 
-    private String getRequestUrl(String action) {
-        return Constants.API_HOST + "?action=" + action;
+    private String getRequestUrl(String action) throws NoSuchAlgorithmException {
+        return Constants.API_HOST + "?action=" + action + "&token=" + TokenGenerator.generateToken();
     }
 
     private void showGetDataResponse(JSONObject response) {

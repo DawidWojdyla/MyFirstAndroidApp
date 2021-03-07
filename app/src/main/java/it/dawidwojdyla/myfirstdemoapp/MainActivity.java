@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
             saveInstanceState.putString("messageTextView", messageTextView.getText().toString());
             saveInstanceState.putString("nicknameEditText", nicknameEditText.getText().toString());
         }
-
     }
 
     @Override
